@@ -1,0 +1,12 @@
+.todo {
+    margin: auto;
+    text-align: center;
+  }
+  
+  .todo_item {
+    display: flex;
+  }
+  
+  .todo_name {
+    margin-right: 10px;
+  }
