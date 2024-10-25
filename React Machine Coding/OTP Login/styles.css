@@ -1,0 +1,13 @@
+/* ----------------------Mobile Login------------------------ */
+.mobile__login {
+    text-align: center;
+    margin: auto;
+  }
+  
+  .otpInput {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    text-align: center;
+    font-size: 1.2em;
+  }
