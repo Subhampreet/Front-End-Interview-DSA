@@ -212,3 +212,7 @@
     background-color: #a41e1e;
   }
   
+  .cart .cart_empty {
+    text-align: center;
+  }
+  

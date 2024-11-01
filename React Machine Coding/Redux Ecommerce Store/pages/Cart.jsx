@@ -12,7 +12,7 @@ export default function Cart() {
 
   return (
     <div className="cart">
-      <div>
+      {products.length !== 0 ? (
         <div className="prod_list">
           {products?.map((prod) => (
             <div className="prod_card" id={prod.id}>
@@ -35,7 +35,9 @@ export default function Cart() {
             </div>
           ))}
         </div>
-      </div>
+      ) : (
+        <h4 className="cart_empty">Cart is empty</h4>
+      )}
     </div>
   );
 }
