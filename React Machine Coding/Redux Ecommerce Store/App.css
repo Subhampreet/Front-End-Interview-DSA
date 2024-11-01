@@ -2,43 +2,7 @@
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
-    text-align: center;
-  }
-  
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
-  
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
-    }
-  }
-  
-  .card {
-    padding: 2em;
-  }
-  
-  .read-the-docs {
-    color: #888;
+    /* text-align: center; */
   }
   
   /* -----------------------navbar-------------------- */
@@ -60,9 +24,17 @@
     font-weight: 600;
   }
   
+  .nav_body .nav_logo:hover {
+    cursor: pointer;
+  }
+  
   .nav_body .nav_cart {
     font-size: 30px;
     font-weight: 600;
+  }
+  
+  .nav_body .nav_cart:hover {
+    cursor: pointer;
   }
   
   /* -----------------Product Card------------------- */
@@ -184,3 +156,59 @@
       font-size: 0.8rem;
     }
   }
+  
+  /* ------------------ Cart -------------------- */
+  
+  .cart {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .cart .prod_card {
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    width: 750px;
+    margin: auto;
+    background-color: var(--card-background);
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .cart .prod_card .prod_left {
+    width: 20%;
+  }
+  
+  .cart .prod_card .prod_left img {
+    width: 100%;
+  }
+  
+  .cart .prod_card .prod_right {
+    width: 70%;
+  }
+  
+  .cart .prod_card .prod_right .prod_desc {
+    height: 60px;
+    line-height: 20px; /* Height / no. of lines to display */
+    overflow: hidden;
+    width: 90%;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .cart .prod_card .prod_right .prod_right_bottom {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cart .product-card__btn:hover {
+    background-color: #a41e1e;
+  }
+  
