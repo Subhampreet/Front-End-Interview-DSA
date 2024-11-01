@@ -1,7 +1,14 @@
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { remove } from '../store/cartSlice';
 
 export default function Cart() {
   const products = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const removeFromCart = (prod) => {
+    dispatch(remove(prod));
+  };
 
   return (
     <div className="cart">
@@ -19,7 +26,7 @@ export default function Cart() {
                   <h4>$ {prod.price}</h4>
                   <button
                     className="product-card__btn"
-                    onClick={() => addToCart(prod)}
+                    onClick={() => removeFromCart(prod)}
                   >
                     Remove from Cart
                   </button>
