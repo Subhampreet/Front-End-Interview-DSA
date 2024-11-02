@@ -18,9 +18,26 @@ export default function Cart() {
     dispatch(decrementRemove(prod));
   };
 
+  const calculateTotalPrice = () => {
+    // return products.reduce((total, item) => {
+    //   return total + item.price * item.quantity;
+    // }, 0);
+    return (
+      Math.round(
+        products.reduce(
+          (total, item) => total + item.price * item.quantity,
+          0
+        ) * 100
+      ) / 100
+    );
+  };
+
   return (
     <div className="cart">
       {/* {JSON.stringify(products)} */}
+      <div className="bill">
+        <h4>Total Amount : {calculateTotalPrice()}</h4>
+      </div>
       {products.length !== 0 ? (
         <div className="prod_list">
           {products?.map((prod) => (
