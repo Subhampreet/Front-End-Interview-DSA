@@ -1,127 +1,76 @@
-<h1 align="center">Data-Structures & Algorithms</h1>
+<h1 align="center">JavaScript & React Interview Questions</h1>
 
-Algorithms and data structures are fundamental to efficient code and good software design. Creating and designing excellent algorithms is required for being an exemplary programmer. This repository's goal is to demonstrate how to correctly implement common data structures and algorithms in the simplest and most elegant ways.
+This repository contains a few hundred curated JavaScript interview questions with high quality answers for acing your Front End Engineer interviews.
 
-## Contents
+### What is Event Bubbling or Bubbling in JS ? 
+Event Bubbling is a concept in the DOM (Document Object Model). It happens when an element receives an event, and that event bubbles up (or you can say is transmitted or propagated) to its parent and ancestor elements in the DOM tree until it gets to the root element.
 
-- [Data Structures & Algorithms Basics](https://github.com/The-Cool-Coders/Data-Structures-and-Algorithms#what-is-data-structure)
-- [Analysis of Algorithm](https://github.com/The-Cool-Coders/Data-Structures-and-Algorithms#analysis-of-algorithm)
-- [Greedy Algorithm]()
+- Event bubbling is essential for event delegation, where a single event handler manages events for multiple child elements, enhancing performance and code simplicity. While convenient, failing to manage event propagation properly can lead to unintended behavior, such as multiple handlers firing for a single event.
+- Use **event.stopPropagation()** to stop the event bubbling to the parent / root elements
 
-## What is Data Structure?
+```js
+const div = document.getElementById("div");
+const span = document.getElementById("span");
+const button = document.getElementById("button");
 
-Data Structures are the programmatic way of storing data so that data can be used efficiently. Almost every enterprise application uses various types of data structures in one or the other way. This repository will give you a great understanding on Data Structures needed to understand the complexity of enterprise level applications and need of algorithms, and data structures.
+div.addEventListener("click", () => {
+  console.log("div was clicked");
+});
+span.addEventListener("click", () => {
+  console.log("span was clicked");
+});
+button.addEventListener("click", (event) => {
+ // Use stopPropagation() to stop event bubbling
+  event.stopPropagation();
+  console.log("button was clicked");
+});
+```
 
-From the data structure point of view, following are some important categories of algorithms:
+### What is Event Delegation in JavaScript ?
+Event delegation is a event handling pattern in which you handle the events at a higher level in the DOM tree instead of the actual level where the event was received. The event delegation is based on event bubbling concept.
 
-- <b>Search</b> − Algorithm to search an item in a data structure.
-- <b>Sort</b> − Algorithm to sort items in a certain order.
-- <b>Insert</b> − Algorithm to insert item in a data structure.
-- <b>Update</b> − Algorithm to update an existing item in a data structure.
-- <b>Delete</b> − Algorithm to delete an existing item from a data structure.
+**Advantages -** 
 
-## Analysis of Algorithm
+- **Improved performance**: Attaching a single event listener is more efficient than attaching multiple event listeners to individual elements, especially for large or dynamic lists. This reduces memory usage and improves overall performance.
+- **Dynamic Content Handling:** Event delegation can automatically handle events on new child elements that are added later.
 
-### Why Performance analysis?
+```html
+<div id="div">
+      <span id="span">
+        <button>button1</button>
+        <button>button2</button>
+        <button>button3</button>
+        <!-- Elements can be added without thinking much about the backend JS function -->
+        <button>button4</button>
+      </span>
+ </div>
+```
+```js
+const div = document.getElementById("div");
 
-Algorithms are often quite different from one another, though the objective of these algorithms is the same. For example, we know that a set of numbers can be sorted using different algorithms. The number of comparisons performed by one algorithm may vary with others for the same input. Hence, the time complexity of those algorithms may differ. At the same time, we need to calculate the memory space required by each algorithm.
+div.addEventListener("click", (event) => {
+  const target = event.target;
 
-Analysis of algorithm is the process of analyzing the problem-solving capability of the algorithm in terms of the time and size required (the size of memory for storage while implementation). However, the main concern of the analysis of algorithms is the required time or performance.
+  if (target.tagName === "BUTTON") {
+    console.log(target.innerHTML);
+  }
+});
+```
 
+### Explain “this” keyword in JavaScript
 
-### Given two algorithms for a task, how do we find out which one is better?
+There's no simple explanation for this; it is one of the most confusing concepts in JavaScript because it's behavior differs from many other programming languages. The one-liner explanation of the this keyword is that it is a dynamic reference to the context in which a function is executed.
 
-One naive way of doing this is – implement both the algorithms and run the two programs on your computer for different inputs and see which one takes less time. There are many problems with this approach to the analysis of algorithms.
+A longer explanation follows is that this follows these rules:
 
-1) It might be possible that for some inputs, the first algorithm performs better than the second. And for some inputs second performs better.
-2) It might also be possible that for some inputs, the first algorithm performs better on one machine and the second works better on other machines for some other inputs.
+1. If the new keyword is used when calling the function, meaning the function was used as a function constructor, the this inside the function is the newly-created object instance.
+2. If this is used in a class constructor, the this inside the constructor is the newly-created object instance.
+3. If apply(), call(), or bind() is used to call/create a function, this inside the function is the object that is passed in as the argument.
+4. If a function is called as a method (e.g. obj.method()) — this is the object that the function is a property of.
+5. If a function is invoked as a free function invocation, meaning it was invoked without any of the conditions present above, this is the global object. In the browser, the global object is the window object. If in strict mode ('use strict';), this will be undefined instead of the global object.
+6. If multiple of the above rules apply, the rule that is higher wins and will set the this value.
+7. If the function is an ES2015 arrow function, it ignores all the rules above and receives the this value of its surrounding scope at the time it is created.
 
-Efficiency of an algorithm can be analyzed at two different stages, before implementation and after implementation. They are the following −
+For an in-depth explanation, do check out [Arnav Aggrawal's article on Medium](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3) & [this is JS, Simplified](https://www.youtube.com/watch?v=MgOK_DwJqTM).
 
-- <b>A Priori Analysis</b> − This is a theoretical analysis of an algorithm. Efficiency of an algorithm is measured by assuming that all other factors, for example, processor speed, are constant and have no effect on the implementation.
-- <b>A Posterior Analysis</b> − This is an empirical analysis of an algorithm. The selected algorithm is implemented using programming language. This is then executed on target computer machine. In this analysis, actual statistics like running time and space required, are collected.
-
-#### Space Complexity
-Space complexity of an algorithm represents the amount of memory space required by the algorithm in its life cycle. The space required by an algorithm is equal to the sum of the following two components −
-
-- A fixed part that is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
-- A variable part is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
-
-#### Time Complexity
-
-Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion. Time requirements can be defined as a numerical function T(n), where T(n) can be measured as the number of steps, provided each step consumes constant time.
-
-For example, addition of two n-bit integers takes n steps. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits. Here, we observe that T(n) grows linearly as the input size increases.
-
-### Asymptotic Analysis
-
-In Asymptotic Analysis, the performance of an algorithm is evaluated in terms of input size (we don’t measure the actual running time). We calculate, how the time (or space) taken by an algorithm increases with the input size.
-<br>
-There are three cases to analyze an algorithm: 
-1) The Worst Case 
-2) Average Case 
-3) Best Case
-
-- <b>Worst case</b> - In the worst case analysis, we calculate upper bound on running time of an algorithm. We must know the case that causes maximum number of operations to be executed. For example in Linear Search, the worst case happens when the element to be searched is not present in the array. the worst case time complexity of linear search would be Θ(n).
-- <b>Average Case Analysis</b> - In average case analysis, we take all possible inputs and calculate computing time for all of the inputs. Sum all the calculated values and divide the sum by total number of inputs. For example in linear search problem, let us assume that all cases are uniformly distributed (including the case of the element to be searched not being present in array). So we sum all the cases and divide the sum by (n+1).
-- <b>Best Case Analysis </b> - In the best case analysis, we calculate lower bound on running time of an algorithm. We must know the case that causes minimum number of operations to be executed. In the linear search problem, the best case occurs when the element to be searched is present at the first location.ime complexity in the best case would be Θ(1).
-<br>
-
-### 3 asymptotic notations used to represent time complexity of algorithms:
-- <b>Θ Notation</b> - The theta notation bounds a functions from above and below, so it defines exact asymptotic behavior.
-
-##### Θ(g(n)) = {f(n): there exist positive constants c1, c2 and n0 such that 0 <= c1*g(n) <= f(n) <= c2*g(n) for all n >= n0}
-  
- i.e if f(n) is theta of g(n), then the value f(n) is always between c1*g(n) and c2*g(n) for large values of n (n >= n0) and f(n) must be non-negative for values of n greater than n0.
- <div>
-  <p align="center">
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/AlgoAnalysis-1.png"></p>
-  
-- <b>Big O Notation</b> - The Big O notation defines an upper bound of an algorithm, it bounds a function only from above. 
-
-##### O(g(n)) = { f(n): there exist positive constants c and n0 such that 0 <= f(n) <= c*g(n) for all n >= n0}
-
-<div>
-  <p align="center">
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/AlgoAnalysis-2.png"> </p>
-  </div>
-
-- <b>Ω Notation</b> -  Ω notation provides an asymptotic lower bound.or a given function g(n), we denote by Ω(g(n)) the set of functions.
-
-##### Ω (g(n)) = {f(n): there exist positive constants c and n0 such that 0 <= c*g(n) <= f(n) for all n >= n0}
-
- <div>
-  <p align="center">
- <img align="center" src="https://media.geeksforgeeks.org/wp-content/uploads/AlgoAnalysis-3.png"></p>       
-  
-## Greedy Algorithms
-
-An algorithm is designed to achieve optimum solution for a given problem. In greedy algorithm approach, decisions are made from the given solution domain. As being greedy, the closest solution that seems to provide an optimum solution is chosen.
-
-Greedy algorithms try to find a localized optimum solution, which may eventually lead to globally optimized solutions. However, generally greedy algorithms do not provide globally optimized solutions.
-
-### Counting Coins
-
-This problem is to count to a desired value by choosing the least possible coins and the greedy approach forces the algorithm to pick the largest possible coin. If we are provided coins of ₹ 1, 2, 5 and 10 and we are asked to count ₹ 18 then the greedy procedure will be −
-
-- Select one ₹ 10 coin, the remaining count is 8
-- Then select one ₹ 5 coin, the remaining count is 3
-- Then select one ₹ 2 coin, the remaining count is 1
-- And finally, the selection of one ₹ 1 coins solves the problem
-
-Though, it seems to be working fine, for this count we need to pick only 4 coins. But if we slightly change the problem then the same approach may not be able to produce the same optimum result.
-
-For the currency system, where we have coins of 1, 7, 10 value, counting coins for value 18 will be absolutely optimum but for count like 15, it may use more coins than necessary. For example, the greedy approach will use 10 + 1 + 1 + 1 + 1 + 1, total 6 coins. Whereas the same problem could be solved by using only 3 coins (7 + 7 + 1)
-
-Hence, we may conclude that the greedy approach picks an immediate optimized solution and may fail where global optimization is a major concern.
-
-## Resources
-
-- [500 Data Structures and Algorithms Problems](https://www.quora.com/q/techiedelight/500-Data-Structures-and-Algorithms-interview-questions-and-their-solutions)
-- [Books for Data Structure and Algorithms](https://drive.google.com/drive/folders/1bho74NtIOGIz-PesCL53vNoKNUMvQti7?usp=sharing)
-- [Competitve Programming Algorithms with Explanation](https://cp-algorithms.com/)
-- [1000+ Competitive Programming Problems with Video Solutions](https://docs.google.com/spreadsheets/u/2/d/130TNBp7kVemTJHxooPzgMpykdaVMtniU3kIFpntHxNc/htmlview#gid=84654839)
-- [The Ultimate Topic List(with Tutorials, Problems, and Templates)](https://shahjalalshohag.github.io/blog/topic-list/)
-- [Competitive Programming Curated Sheet](https://bit.ly/35CPH0d)   
-- [DSA Sheet by Nishant Chahar](https://docs.google.com/spreadsheets/d/16MyliPAOywm5H3Hmy_Utk6P5gwx4vvpb7i5iAqj1Aw4/edit#gid=0)
    
