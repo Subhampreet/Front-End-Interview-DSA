@@ -1,0 +1,29 @@
+/* -------------------------- Timer -------------------------- */
+
+.timer {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    background-color: rgb(12, 3, 44);
+    color: rgb(234, 234, 255);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .time {
+    font-size: 100px;
+    margin-bottom: 40px;
+  }
+  
+  .control {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    font-weight: 500 !important;
+    margin-right: 10px;
+  }
