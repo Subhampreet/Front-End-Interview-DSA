@@ -73,4 +73,27 @@ A longer explanation follows is that this follows these rules:
 
 For an in-depth explanation, do check out [Arnav Aggrawal's article on Medium](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3) & [this is JS, Simplified](https://www.youtube.com/watch?v=MgOK_DwJqTM).
 
+### What are callback functions in JS?
+Callback function is a function which is passed as an argument to another function. Using callback helps you to call a function from another function. 
+```js
+function log(value) {
+  console.log(value);
+}
+
+function findSum(num1, num2, print) {
+  const sum = num1 + num2;
+
+  print(sum);
+}
+
+findSum(20, 30, log);
+
+// Example -
+// window.addEventListener(event, callback function)
+```
+
+
+
+
+
    
