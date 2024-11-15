@@ -2,6 +2,32 @@
 
 This repository contains a few hundred curated JavaScript interview questions with high quality answers for acing your Front End Engineer interviews.
 
+### What are the differences between JavaScript variables created using `let`, `var` or `const`?
+
+<!-- Update here: /questions/what-are-the-differences-between-variables-created-using-let-var-or-const/en-US.mdx -->
+
+In JavaScript, `let`, `var`, and `const` are all keywords used to declare variables, but they differ significantly in terms of scope, initialization rules, whether they can be redeclared or reassigned and the behavior when they are accessed before declaration:
+
+| Behavior | `var` | `let` | `const` |
+| --- | --- | --- | --- |
+| Scope | Function or Global | Block | Block |
+| Initialization | Optional | Optional | Required |
+| Redeclaration | Yes | No | No |
+| Reassignment | Yes | Yes | No |
+| Accessing before declaration | `undefined` | `ReferenceError` | `ReferenceError` |
+
+### What is the difference between `==` and `===` in JavaScript?
+
+<!-- Update here: /questions/what-is-the-difference-between-double-equal-and-triple-equal/en-US.mdx -->
+
+`==` is the abstract equality operator while `===` is the strict equality operator. The `==` operator will compare for equality after doing any necessary type conversions. The `===` operator will not do type conversion, so if two values are not the same type `===` will simply return `false`.
+
+| Operator | `==` | `===` |
+| --- | --- | --- |
+| Name | (Loose) Equality operator | Strict equality operator |
+| Type coercion | Yes | No |
+| Compares value and type | No | Yes |
+
 ### What is Event Bubbling or Bubbling in JS ? 
 Event Bubbling is a concept in the DOM (Document Object Model). It happens when an element receives an event, and that event bubbles up (or you can say is transmitted or propagated) to its parent and ancestor elements in the DOM tree until it gets to the root element.
 
@@ -91,6 +117,30 @@ findSum(20, 30, log);
 // Example -
 // window.addEventListener(event, callback function)
 ```
+
+### What is the event loop in JavaScript runtimes?
+
+<!-- Update here: /questions/what-is-event-loop-what-is-the-difference-between-call-stack-and-task-queue/en-US.mdx -->
+
+The event loop is concept within the browser runtime environment regarding how asynchronous operations are executed within JavaScript engines. It works as such:
+
+1. The JavaScript engine starts executing scripts, placing synchronous operations on the call stack.
+2. When an asynchronous operation is encountered (e.g., `setTimeout()`, HTTP request), it is offloaded to the respective Web API or Node.js API to handle the operation in the background.
+3. Once the asynchronous operation completes, its callback function is placed in the respective queues – task queues (also known as macrotask queues / callback queues) or microtask queues. We will refer to "task queue" as "macrotask queue" from here on to better differentiate from the microtask queue.
+4. The event loop continuously monitors the call stack and executes items on the call stack. If/when the call stack is empty:
+   1. Microtask queue is processed. Microtasks include promise callbacks (`then`, `catch`, `finally`), `MutationObserver` callbacks, and calls to `queueMicrotask()`. The event loop takes the first callback from the microtask queue and pushes it to the call stack for execution. This repeats until the microtask queue is empty.
+   2. Macrotask queue is processed. Macrotasks include web APIs like `setTimeout()`, HTTP requests, user interface event handlers like clicks, scrolls, etc. The event loop dequeues the first callback from the macrotask queue and pushes it onto the call stack for execution. However, after a macrotask queue callback is processed, the event loop does not proceed with the next macrotask yet! The event loop first checks the microtask queue. Checking the microtask queue is necessary as microtasks have higher priority than macrotask queue callbacks. The macrotask queue callback that was just executed could have added more microtasks!
+      1. If the microtask queue is non-empty, process them as per the previous step.
+      2. If the microtask queue is empty, the next macrotask queue callback is processed. This repeats until the macrotask queue is empty.
+5. This process continues indefinitely, allowing the JavaScript engine to handle both synchronous and asynchronous operations efficiently without blocking the call stack.
+
+The following are resources explaining the event loop:
+
+- [JavaScript Visualized - Event Loop, Web APIs, (Micro)task Queue](https://www.youtube.com/watch?v=eiC58R16hb8) (2024): Lydia Hallie is a popular educator on JavaScript and this is the best recent videos explaining the event loop. There's also an [accompanying blog post](https://www.lydiahallie.com/blog/event-loop) for those who prefer detailed text-based explanations.
+- [In the Loop](https://www.youtube.com/watch?v=cCOL7MC4Pl0) (2018): Jake Archibald previously from the Chrome team provides a visual demonstration of the event loop during JSConf 2018, accounting for different types of tasks.
+- [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (2014): Philip Robert's gave this epic talk at JSConf 2014 and it is one of the most viewed JavaScript videos on YouTube.
+
+
 
 
 
