@@ -203,12 +203,96 @@ alert(result); // 15
 
 For an in-depth explanation do check - [Array methods in JS - javascript.info](https://javascript.info/array-methods)
 
+### Write Polyfill for `map`, `filter`, `reduce`
+- For detailed explanation for the polyfills of map, filter, reduce do check - [Array Methods Polyfills](https://www.youtube.com/watch?v=dGq0gi0wv64)
 
-### What is the difference between map and foreach 
+```js
+// Polyfill for map
+Array.prototype.myMap = function (cb) {
+  let temp = [];
+  for (let i = 0; i < this.length; i++) {
+    temp.push(cb(this[i], i, this));
+  }
+
+  return temp;
+};
+
+const multiplyThree = nums.myMap((num, index, arr) => {
+  return num * 3;
+});
+
+console.log(multiplyThree);
+
+// Polyfill for filter
+Array.prototype.myFilter = function (cb) {
+  let temp = [];
+  for (let i = 0; i < this.length; i++) {
+    if (cb(this[i], i, this)) temp.push(this[i]);
+  }
+
+  return temp;
+};
+
+const moreThanTwo = nums.myFilter((num) => {
+  return num > 2;
+});
+
+console.log(moreThanTwo);
+
+// Polyfill for reduce
+Array.prototype.myReduce = function (cb, initialValue) {
+  let acc = initialValue;
+
+  for (let i = 0; i < this.length; i++) {
+    acc = acc ? cb(acc, this[i], i, this) : this[i];
+  }
+
+  return acc;
+};
+
+const sum = nums.myReduce((acc, curr, i, arr) => {
+  return acc + curr;
+}, 0);
+
+console.log(sum);
+```
+
+
+### What is the difference between `map` and `foreach` 
 - The first difference between `map()` and `forEach()` is the returning value. The `forEach()` method returns `undefined` and `map()` returns a new array with the transformed elements. Even if they do the same job, the returning value remains different.
 - The second difference between these array methods is the fact that `map()` is chainable. This means that you can attach `reduce()`, `sort()`, `filter()` and so on after performing a `map()` method on an array. That's something you can't do with `forEach()` because, as you might guess, it returns `undefined`.
 
 For an in-depth explanation do check - [Main Differences Between forEach and map](https://www.freecodecamp.org/news/4-main-differences-between-foreach-and-map/)
+
+### Explain Map in JavaScript
+    
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type. Methods and properties are:    
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) – creates the map.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) – stores the value by the key.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) – returns the value by the key, `undefined` if `key` doesn’t exist in map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) – returns `true` if the `key` exists, `false` otherwise.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) – removes the element (the key/value pair) by the key.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) – removes everything from the map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) – returns the current element count.
+
+### Explain Set in JavaScript    
+A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) is a special type collection – “set of values” (without keys), where each value may occur only once. Its main methods are:    
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) – creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) – adds a value, returns the set itself.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) – removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) – returns `true` if the value exists in the set, otherwise `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) – removes everything from the set.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) – is the elements count.
+
+### What's the difference between `Map` and `WeakMap`?
+| Map | WeakMap | 
+| --- | --- | 
+| A Map is an unordered list of key-value pairs where the key and the value can be of any type like string, boolean, number, etc. | In a Weak Map, every key can only be an object and function. It used to store weak object references. |
+| Maps are iterable. | WeakMaps are not iterable. |
+| Maps will keep everything even if you don’t use them. | WeakMaps holds the reference to the key, not the key itself. |
+| The garbage collector doesn’t remove a key pointer from `Map` and also doesn’t remove the key from memory. | The garbage collector goes ahead and removes the key pointer from `WeakMap` and also removes the key from memory. WeakMap allows the garbage collector to do its task but not the Map. |
+| Maps have some properties : .set, .get, .delete, .size, .has, .forEach, Iterators. | WeakMaps have some properties : .set, .get, .delete, .has. |
+
 
 
    
