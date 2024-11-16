@@ -140,10 +140,75 @@ The following are resources explaining the event loop:
 - [In the Loop](https://www.youtube.com/watch?v=cCOL7MC4Pl0) (2018): Jake Archibald previously from the Chrome team provides a visual demonstration of the event loop during JSConf 2018, accounting for different types of tasks.
 - [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (2014): Philip Robert's gave this epic talk at JSConf 2014 and it is one of the most viewed JavaScript videos on YouTube.
 
+### Explain the use of the `map` function in JavaScript.
+- The arr.map method is one of the most useful and often used.
+- It calls the function for each element of the array and returns the array of results.
+```js
+// The syntax - 
+let result = arr.map(function(item, index, array) {
+  // returns the new value instead of item
+});
+
+Usage - 
+let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
+alert(lengths); // 5,7,6
+```
+
+### Explain `filter` method in JavaScript
+- The `find` method looks for a single (first) element that makes the function return true.
+- If there may be many, we can use `arr.filter(fn)`.
+- `filter` returns an array of all matching elements
+```js
+// The syntax - 
+let results = arr.filter(function(item, index, array) {
+  // if true item is pushed to results and the iteration continues
+  // returns empty array if nothing found
+});
+
+// Example - 
+let users = [
+  {id: 1, name: "John"},
+  {id: 2, name: "Pete"},
+  {id: 3, name: "Mary"}
+];
+
+// returns array of the first two users
+let someUsers = users.filter(item => item.id < 3);
+
+alert(someUsers.length); // 2
+```
+### Explain `reduce` method in JavaScript
+- The method `arr.reduce` used to calculate a single value based on the array.
+- The function is applied to all array elements one after another and “carries on” its result to the next call.
+```js
+// The syntax is:
+let value = arr.reduce(function(accumulator, item, index, array) {
+  // ...
+}, [initial]);
+
+// Example -
+let arr = [1, 2, 3, 4, 5];
+
+let result = arr.reduce((sum, current) => sum + current, 0);
+
+alert(result); // 15
+
+```
+
+##### Arguments:
+1. accumulator – is the result of the previous function call, equals initial the first time (if initial is provided).
+2. item – is the current array item.
+3. index – is its position.
+4. array – is the array.
+
+For an in-depth explanation do check - [Array methods in JS - javascript.info](https://javascript.info/array-methods)
 
 
+### What is the difference between map and foreach 
+- The first difference between `map()` and `forEach()` is the returning value. The `forEach()` method returns `undefined` and `map()` returns a new array with the transformed elements. Even if they do the same job, the returning value remains different.
+- The second difference between these array methods is the fact that `map()` is chainable. This means that you can attach `reduce()`, `sort()`, `filter()` and so on after performing a `map()` method on an array. That's something you can't do with `forEach()` because, as you might guess, it returns `undefined`.
 
-
+For an in-depth explanation do check - [Main Differences Between forEach and map](https://www.freecodecamp.org/news/4-main-differences-between-foreach-and-map/)
 
 
    
