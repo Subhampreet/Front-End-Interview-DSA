@@ -388,7 +388,6 @@ export default DataFetcher;
 Sometimes, side effects need to be cleaned up, especially when dealing with subscriptions or timers to prevent memory leaks. The `useEffect` hook can return a cleanup function that will be executed when the component unmounts.
 
 ```js
-```jsx
 // In this example, the setInterval function is used to update the seconds state every second.
 // The cleanup function returned by useEffect clears the interval when the component is unmounted.
 
@@ -410,7 +409,6 @@ const Timer = () => {
 };
 
 export default Timer;
-
 ```
 
 
