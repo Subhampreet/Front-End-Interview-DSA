@@ -389,7 +389,8 @@ Sometimes, side effects need to be cleaned up, especially when dealing with subs
 
 ```js
 ```jsx
-// In this example, the setInterval function is used to update the seconds state every second. The cleanup function returned by useEffect clears the interval when the component is unmounted.
+// In this example, the setInterval function is used to update the seconds state every second.
+// The cleanup function returned by useEffect clears the interval when the component is unmounted.
 
 import React, { useState, useEffect } from 'react';
 
