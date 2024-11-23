@@ -294,5 +294,129 @@ A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 | Maps have some properties : .set, .get, .delete, .size, .has, .forEach, Iterators. | WeakMaps have some properties : .set, .get, .delete, .has. |
 
 
+<h1 align="center">React Interview Questions</h1>
+
+### Can you explain the virtual DOM in React?
+    
+The virtual DOM is an in-memory representation of the real DOM elements. Instead of interacting directly with the real DOM, which can be slow and costly in terms of performance, React creates a virtual representation of the UI components. This virtual representation is a lightweight JavaScript object that mirrors the structure of the real DOM.
+  
+  Here's a step-by-step process of how the virtual DOM works:
+  
+  1. **Step 1 – Initial Rendering**: when the app starts, the entire UI is represented as a Virtual DOM. React elements are created and rendered into the virtual structure.
+  2. **Step 2 – State and Props Changes**: as the states and props change in the app, React re-renders the affected components in the virtual DOM. These changes do not immediately impact the real DOM.
+  3. **Step 3 – Comparison Using Diff Algorithm**: React then uses a **diffing algorithm** to compare the current version of the Virtual DOM with the previous version. This process identifies the differences (or "diffs") between the two versions.
+  4. **Step 4 – Reconciliation Process**: based on the differences identified, React determines the most efficient way to update the real DOM. Only the parts of the real DOM that need to be updated are changed, rather than re-rendering the entire UI. This selective     updating is quick and performant.
+  5. **Step 5 – Update to the Real DOM**: finally, React applies the necessary changes to the real DOM. This might involve adding, removing, or updating elements based on the differences detected in step 3.
+  
+  Read the following article for detailed understanding - [What is the Virtual DOM in React?](https://www.freecodecamp.org/news/what-is-the-virtual-dom-in-react/)
+
+### What is lifting state up in React?
+
+Lifting state up is an important pattern for React developers because sometimes we have state that's located within a particular component that also needs to be shared with sibling components.
+    
+Instead of using an entire state management library like Redux or React Context, we can just lift the state up to the closest common ancestor and pass both the state variables the state values down as well as any callbacks to update that state.
+    
+Read the following article for detailed understanding - [What Is "Lifting State Up" in React?](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
+
+### What are Higher Order Components? 
+    
+HOCs are functions that wrap existing components, providing them with additional props or behaviors. Like a gift wrap, wrapping an existing component and adding additional feature to the gift. 
+    
+The main benefit of HOCs is that they enable us to extend the functionality of multiple components without repeating the same code in each of them. This promotes code reuse and enhances the maintainability of your React applications. Examples - Auth Check, Dark Mode / Light Mode Application etc. 
+    
+Read the following article for detailed understanding - [Mastering Higher Order Components (HOCs) in React | HackerNoon](https://hackernoon.com/mastering-higher-order-components-hocs-in-react)
+
+### Explain `useState` hook and its purpose
+
+The `useState` hook is perhaps the most basic and essential hook in React. It enables you to add state to your functional components, allowing them to keep track of data that changes over time. Let's dive into how `useState` works with a simple example.
+
+```js
+import React, { useState } from 'react';
+
+const Counter = () => {
+  // Declare a state variable named 'count' with an initial value of 0
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+### Can you describe the useEffect hook and its purpose?
+
+The `useEffect` hook is used to perform side effects in your functional components, such as fetching data, subscribing to external events, or manually changing the DOM. It combines the functionality of `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` in class components.
+
+```js
+import React, { useState, useEffect } from 'react';
+
+const DataFetcher = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from an API
+    fetch('https://api.example.com/data')
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  return (
+    <div>
+      {data ? (
+        <ul>
+          {data.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading data...</p>
+      )}
+    </div>
+  );
+};
+
+export default DataFetcher;
+```
+**Cleanup using `useEffect`**
+
+Sometimes, side effects need to be cleaned up, especially when dealing with subscriptions or timers to prevent memory leaks. The `useEffect` hook can return a cleanup function that will be executed when the component unmounts.
+
+```js
+```jsx
+// In this example, the setInterval function is used to update the seconds state every second. The cleanup function returned by useEffect clears the interval when the component is unmounted.
+
+import React, { useState, useEffect } from 'react';
+
+const Timer = () => {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array for initial setup only
+
+  return <p>Seconds: {seconds}</p>;
+};
+
+export default Timer;
+
+```
+```
+
+
+     
+   
+
+
 
    
