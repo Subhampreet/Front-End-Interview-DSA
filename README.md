@@ -411,8 +411,78 @@ const Timer = () => {
 export default Timer;
 ```
 
+### Can you describe the `useContext` hook and its purpose?
+    
+The `useContext` hook is used to consume values from a React context. Context provides a way to pass data through the component tree without having to pass props manually at every level. Let's explore how `useContext` works with a simple example.
 
-     
+```js
+// We create an AuthContext using createContext and provide an AuthProvider component. The AuthProvider component wraps its children with the context provider and includes functions for logging in and out.
+
+import React, { createContext, useContext, useState } from 'react';
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const login = () => {
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+  };
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+```
+
+```js
+// Consuming useContext in the children components 
+// Here, the useAuth hook is used to access the values provided by the AuthContext. The AuthStatus component displays the user's login status and provides buttons to log in and out.
+
+import React from 'react';
+import { useAuth } from './AuthContext';
+
+const AuthStatus = () => {
+  const { isAuthenticated, login, logout } = useAuth();
+
+  return (
+    <div>
+      <p>User is {isAuthenticated ? 'logged in' : 'logged out'}</p>
+      <button onClick={login}>Login</button>
+
+
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
+};
+
+export default AuthStatus;
+```
+
+### Explain useReducer in React and its usage
+The `useReducer` hook in React is an alternative to `useState` for managing more complex state logic. It is particularly useful when the state depends on previous states or involves multiple sub-values, enabling better organization and control.
+
+**How `useReducer` Works**
+
+`useReducer` is based on the **Reducer Pattern**:
+
+1. **Reducer Function**: A pure function that takes the current state and an action, then returns the new state.
+2. **Dispatch**: A function used to send actions to the reducer.
+3. **State**: The state managed by the reducer.
+
+Read the following article for detailed understanding - [How to useReducer in React](https://www.robinwieruch.de/react-usereducer-hook/)
+
+
    
 
 
