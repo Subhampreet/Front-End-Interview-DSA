@@ -482,6 +482,197 @@ The `useReducer` hook in React is an alternative to `useState` for managing more
 
 Read the following article for detailed understanding - [How to useReducer in React](https://www.robinwieruch.de/react-usereducer-hook/)
 
+### Explain the use of custom hooks in React
+
+Read the following article for detailed understanding - [Custom Hooks in React](https://www.robinwieruch.de/react-custom-hook/)
+
+```js
+const useBoolean = () => {
+  const [state, setState] = React.useState();
+
+  const handleTrue = () => setState(true);
+  const handleFalse = () => setState(false);
+  const handleToggle = () => setState(!state);
+
+  return [
+    state,
+    {
+      setTrue: handleTrue,
+      setFalse: handleFalse,
+      setToggle: handleToggle,
+    },
+  ];
+};
+```
+```js
+function App() {
+  const [isToggle, {
+    setToggle,
+    setTrue,
+    setFalse,
+  }] = useBoolean(false);
+
+  return (
+    <div>
+      <button type="button" onClick={setToggle}>
+        Toggle
+      </button>
+      <button type="button" onClick={setTrue}>
+        To True
+      </button>
+      <button type="button" onClick={setFalse}>
+        To False
+      </button>
+
+      {isToggle.toString()}
+    </div>
+  );
+}
+```
+
+### How do you update the state of a parent component from a child component?
+    
+  To update the state of a parent component from a child component, you can pass a **state-updating function** (defined in the parent) as a **prop** to the child component. The child can then invoke this function to update the parent's state.
+    
+  **Steps to Update Parent State from Child**
+    
+  1. **Define State in the Parent Component**: The parent component owns the state and provides a function to update it.
+  2. **Pass the Update Function as a Prop**: The parent's state-updating function is passed to the child component as a prop.
+  3. **Invoke the Update Function in the Child**: The child component calls the function to modify the parent's state.
+**Example**
+
+**Parent Component**
+```js
+import React, { useState } from "react";
+import Child from "./Child";
+
+const Parent = () => {
+  const [message, setMessage] = useState("Hello from Parent");
+
+  // Function to update state
+  const updateMessage = (newMessage) => {
+    setMessage(newMessage);
+  };
+
+  return (
+    <div>
+      <h1>{message}</h1>
+      <Child updateMessage={updateMessage} />
+    </div>
+  );
+};
+
+export default Parent;
+```
+**Child Component**
+```js
+import React from "react";
+
+const Child = ({ updateMessage }) => {
+  const handleChange = () => {
+    updateMessage("Message updated from Child!");
+  };
+
+  return (
+    <button onClick={handleChange}>Update Parent Message</button>
+  );
+};
+
+export default Child;
+```
+
+  **Alternative Approaches**
+  
+  1. **Using Context API**:
+  2. **State Management Libraries**
+
+### What is prop drilling and how can you avoid it?
+    
+  Prop drilling refers to the process of passing data (props) from a parent component to a deeply nested child component through multiple intermediary components, even if those intermediary components do not directly need the data.
+    
+  **Problems with Prop Drilling**
+    
+  1. **Unnecessary Complexity**: Makes components tightly coupled, harder to maintain and refactor.
+  2. **Code Duplication**: Repetitive passing of props through intermediate components.
+  3. **Scalability Issues**: As the app grows, managing deeply nested props becomes cumbersome.
+    
+  **How to Avoid Prop Drilling -**
+    
+  1. Use React Context API
+  2. Use State Management Libraries - Redux, Zustand, MobX
+  3. Higher Order components
+  4. Custom Hooks
+
+### How to call parent component method from child component in react ?
+    
+To call a parent component's method from a child component in React, you can pass the parent method as a prop to the child component. This establishes communication between the child and the parent.
+
+### Explain lazy loading & create a lazy loaded component in react ?
+Lazy loading is a design pattern used to improve application performance by deferring the loading of components or resources until they are actually needed. In React, lazy loading is commonly used for components to reduce the initial load time by splitting the code into smaller chunks (code-splitting).
+
+**How It Works**
+When a React app is built, all components are usually bundled into a single JavaScript file. Lazy loading splits this file into smaller chunks, loading only the necessary parts as the user navigates the app. This helps in:
+- **Reducing initial load time**.
+- **Improving user experience** for larger applications.
+- **Optimizing resource utilization**.
+
+**Syntax**
+```javascript
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+```
+
+**Example**
+
+**Component Setup**
+```javascript
+// LazyComponent.js
+import React from 'react';
+
+const LazyComponent = () => {
+  return <h1>This is a lazy-loaded component!</h1>;
+};
+
+export default LazyComponent;
+```
+
+**Using Lazy Loading in the App**
+```javascript
+import React, { Suspense } from 'react';
+
+// Lazy load the component
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+const App = () => {
+  return (
+    <div>
+      <h1>Welcome to My App</h1>
+      {/* Suspense provides a fallback UI while loading */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent />
+      </Suspense>
+    </div>
+  );
+};
+
+export default App;
+```
+
+**Key Elements**
+1. **`React.lazy`:**
+   Dynamically imports the component.
+
+2. **`Suspense`:**
+   Wraps the lazy-loaded component and displays a fallback UI (like a loading spinner) while the component is being fetched.
+
+**Benefits of Lazy Loading**
+- **Performance Optimization:**  
+- **Efficient Resource Utilization:**
+- **Improved User Experience:**
+
+Read the following article to understand [Lazy Loading in Routes](https://www.robinwieruch.de/react-router-lazy-loading/)
+
+
+
 
    
 
