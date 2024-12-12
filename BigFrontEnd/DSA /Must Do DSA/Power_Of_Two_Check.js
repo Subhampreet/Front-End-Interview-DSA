@@ -16,3 +16,14 @@ function isPowerOfTwo(n){
   
   console.log(isPowerOfTwo(5))
   console.log(isPowerOfTwo(16))
+
+//   Using Bitwise Operator 
+
+function isPowerOfTwoBitWise(n) {
+    if (n < 1){
+      return false;
+    }
+  
+    return (n & (n - 1)) === 0;
+}
+  
