@@ -14,20 +14,20 @@
 // Solution 2: Sort Array using Arrays.Sort in Java
 // Compare element in 1 & i+1
 
-class Solution {
-    public boolean containsDuplicate(int[] nums) {
-        Arrays.sort(nums);
+// class Solution {
+//     public boolean containsDuplicate(int[] nums) {
+//         Arrays.sort(nums);
 
-        for(int i = 0; i < nums.length - 1; i++){
-            if(nums[i] == nums[i+1]) return true;
-        }
-        return false;
-    }
-}
+//         for(int i = 0; i < nums.length - 1; i++){
+//             if(nums[i] == nums[i+1]) return true;
+//         }
+//         return false;
+//     }
+// }
 
 // JavaScript Solution : https://www.youtube.com/watch?v=hRt9qadriyQ
 
-// var containsDuplicate = function(nums) {
-//     const set = new Set(nums);
-//     return set.size !== nums.length
-// };
+var containsDuplicate = function(nums) {
+    const set = new Set(nums);
+    return set.size !== nums.length
+};
