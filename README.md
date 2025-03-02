@@ -310,6 +310,40 @@ The virtual DOM is an in-memory representation of the real DOM elements. Instead
   
   Read the following article for detailed understanding - [What is the Virtual DOM in React?](https://www.freecodecamp.org/news/what-is-the-virtual-dom-in-react/)
 
+### What is reconciliation in React?
+    
+  In React, reconciliation is **the process of updating the user interface (UI) when the state or data of a component changes**. It's a core feature of React that helps ensure fast and efficient updates. 
+  
+  1. React compares the current state of a component to its previous state
+  2. React uses a diffing algorithm to identify the differences between the two states
+  3. React determines which parts of the DOM need to be updated, added, or removed
+  4. React updates the DOM to reflect the changes
+  
+  **Benefits of reconciliation**
+  
+  1. Reconciliation minimizes the number of DOM operations, which improves performance
+  2. Reconciliation ensures that the UI is consistent with the underlying data, which prevents rendering errors
+
+### What are React fibers, and how do they improve rendering?
+    
+  React Fiber is a core algorithm within React that significantly improves rendering performance by breaking down the rendering process into smaller, manageable chunks, allowing React to pause and resume work as needed, thus maintaining responsiveness even during complex updates and preventing the UI from freezing during heavy computations; essentially enabling "incremental rendering" where updates are spread across multiple frames instead of happening all at once.
+  
+  **Key points about React Fiber:** 
+  
+  - **Incremental Rendering:** The primary benefit of Fiber is its ability to split rendering work into smaller units called "fibers," allowing React to prioritize updates and distribute rendering across multiple frames, resulting in a smoother user experience.
+  - **Priority-Based Updates:** Developers can assign priorities to different updates, ensuring that critical changes are rendered first, while less important updates can be deferred.
+  - **Pause and Resume Capability:** React can pause rendering work in the middle of an update if a higher priority task comes in, and then resume later where it left off.
+  - **Better Animation Handling:** By enabling incremental rendering, Fiber is particularly beneficial for animations and gestures, allowing for smoother visual transitions.
+  
+  **How it works:** 
+  
+  - **Fiber Tree:** When a component renders, React creates a tree-like structure called a "Fiber tree" where each node represents a component and its properties.
+  - **Reconciliation:** When data changes, React compares the new component tree with the existing one to identify differences and determine what needs to be updated in the DOM.
+  - **Work Units:** During reconciliation, the work is divided into smaller units (fibers) which can be paused and resumed depending on the priority and available time.
+  
+  Overall, React Fiber significantly enhances the performance of React applications by allowing for more granular control over the rendering process, making it especially beneficial for complex UIs with frequent updates and animations.
+
+
 ### What is lifting state up in React?
 
 Lifting state up is an important pattern for React developers because sometimes we have state that's located within a particular component that also needs to be shared with sibling components.
@@ -607,6 +641,87 @@ export default Child;
     
 To call a parent component's method from a child component in React, you can pass the parent method as a prop to the child component. This establishes communication between the child and the parent.
 
+### What are React Suspense and React.lazy?
+    
+  React provides **lazy loading** capabilities using `React.lazy()` and `React.Suspense` to improve performance by dynamically loading components only when needed.
+  
+  **React.lazy()**
+  
+  `React.lazy()` is a function that enables **code-splitting** by loading components dynamically. It works with ES6’s dynamic `import()` to load a component only when it's needed.
+  
+  **Example: Using React.lazy()**
+  
+  ```jsx
+  import React, { Suspense, lazy } from "react";
+  
+  // Lazy load the component
+  const LazyComponent = lazy(() => import("./LazyComponent"));
+  
+  function App() {
+    return (
+      <div>
+        <h1>My App</h1>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LazyComponent />
+        </Suspense>
+      </div>
+    );
+  }
+  
+  export default App;
+  
+  ```
+  
+  💡 **How it Works:**
+  
+  - `lazy(() => import('./LazyComponent'))` dynamically imports the component.
+  - The component is only loaded when needed, reducing the initial bundle size.
+  - **Must be wrapped in `<Suspense>`** to provide a fallback UI while loading.
+  
+  **React Suspense**
+  
+  `React.Suspense` is a component that lets you **handle loading states** for lazy-loaded components and asynchronous data fetching (in React Server Components).
+  
+  **Use Cases of Suspense**
+  
+  - **Lazy Loading Components** (via `React.lazy()`)
+  - **Fetching Data with Suspense-enabled Libraries** (like React Server Components, Relay, or React Query)
+  
+  **Example: Suspense for Data Fetching (React Server Components)**
+  
+  ```tsx
+  import { Suspense } from "react";
+  import UserProfile from "./UserProfile";
+  
+  function App() {
+    return (
+      <Suspense fallback={<div>Loading user data...</div>}>
+        <UserProfile />
+      </Suspense>
+    );
+  }
+  
+  ```
+  
+  💡 **How it Works:**
+  
+  - When `UserProfile` needs to fetch data, React pauses rendering.
+  - The fallback UI (`Loading user data...`) is shown until the data is available.
+  
+  **Key Differences Between React.lazy() and React.Suspense**
+  
+  | Feature | React.lazy() | React.Suspense |
+  | --- | --- | --- |
+  | Purpose | Code-splitting (dynamic component import) | Handles loading states for lazy components & async data |
+  | Works With | Components only | Components & data fetching |
+  | Needs Suspense? | Yes ✅ | Yes ✅ |
+  | Example Use Case | Lazy loading a Dashboard component | Showing a loading spinner while fetching user data |
+  
+  **🚀 When to Use Them?**
+  
+  - Use `React.lazy()` when you want to split your bundle and **load components only when needed**.
+  - Use `React.Suspense` to **handle loading states** for lazy components or asynchronous data fetching in React Server Components.
+
 ### Explain lazy loading & create a lazy loaded component in react ?
 Lazy loading is a design pattern used to improve application performance by deferring the loading of components or resources until they are actually needed. In React, lazy loading is commonly used for components to reduce the initial load time by splitting the code into smaller chunks (code-splitting).
 
@@ -672,8 +787,19 @@ export default App;
 Read the following article to understand [Lazy Loading in Routes](https://www.robinwieruch.de/react-router-lazy-loading/)
 
 
-
-
+### What's difference between useMemo & useCallback? 
+    
+  The main difference between useMemo and useCallback is that **useMemo returns a value, while useCallback returns a function.** Both are React hooks that help optimize performance by avoiding unnecessary re-renders.
+  
+  |  | useMemo | useCallback |
+  | --- | --- | --- |
+  | What it returns | A memoized value | A memoized function |
+  | When it's used | For expensive calculations or data transformations | To cache a function that relies on changing props or state |
+  
+  **When to use**
+  
+  - useMemo is good for optimizing expensive calculations or data transformations.
+  - useCallback is good for handling events and other functions that get passed down to child components.
    
 
 
