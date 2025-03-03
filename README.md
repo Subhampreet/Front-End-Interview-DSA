@@ -1,8 +1,16 @@
 <h1 align="center">JavaScript & React Interview Questions</h1>
 
-This repository contains a few hundred curated JavaScript interview questions with high quality answers for acing your Front End Engineer interviews.
+This repository contains a few hundred curated JavaScript & React interview questions with high quality answers for acing your Front End Engineer interviews.
 
-### What are the differences between JavaScript variables created using `let`, `var` or `const`?
+## Table of Contents
+
+| #  | Question |
+|----|----------|
+| 1  | [What are the differences between JavaScript variables created using let, var or const?](#what-are-the-differences-between-javascript-variables-created-using-let-var-or-const) |
+| 2  | [What is the difference between == and === in JavaScript?](#what-is-the-difference-between--and--in-javascript) |
+
+
+### 1. What are the differences between JavaScript variables created using `let`, `var` or `const`?
 
 <!-- Update here: /questions/what-are-the-differences-between-variables-created-using-let-var-or-const/en-US.mdx -->
 
@@ -16,7 +24,7 @@ In JavaScript, `let`, `var`, and `const` are all keywords used to declare variab
 | Reassignment | Yes | Yes | No |
 | Accessing before declaration | `undefined` | `ReferenceError` | `ReferenceError` |
 
-### What is the difference between `==` and `===` in JavaScript?
+### 2. What is the difference between `==` and `===` in JavaScript?
 
 <!-- Update here: /questions/what-is-the-difference-between-double-equal-and-triple-equal/en-US.mdx -->
 
