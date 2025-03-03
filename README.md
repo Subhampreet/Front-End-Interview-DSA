@@ -7,7 +7,7 @@ This repository contains a few hundred curated JavaScript & React interview ques
 | #  | Question |
 |----|----------|
 | 1  | [What are the differences between JavaScript variables created using let, var or const?](#what-are-the-differences-between-javascript-variables-created-using-let-var-or-const) |
-| 2  | [What is the difference between == and === in JavaScript?](#what-is-the-difference-between--and--in-javascript) |
+| 2  | [What is the difference between == and === in JavaScript?](#2-what-is-the-difference-between--and--in-javascript) |
 
 
 ### 1. What are the differences between JavaScript variables created using `let`, `var` or `const`?
