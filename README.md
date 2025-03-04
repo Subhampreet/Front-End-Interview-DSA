@@ -6,8 +6,22 @@ This repository contains a few hundred curated JavaScript & React interview ques
 
 | #  | Question |
 |----|----------|
-| 1  | [What are the differences between JavaScript variables created using let, var or const?](#what-are-the-differences-between-javascript-variables-created-using-let-var-or-const) |
+| 1  | [What are the differences between JavaScript variables created using let, var or const?](#1-what-are-the-differences-between-javascript-variables-created-using-let-var-or-const) |
 | 2  | [What is the difference between == and === in JavaScript?](#2-what-is-the-difference-between--and--in-javascript) |
+| 3  | [What is Event Bubbling or Bubbling in JS ? ](#3-what-is-event-bubbling-or-bubbling-in-js-) |
+| 4  | [What is Event Delegation in JavaScript ?](#2-what-is-the-difference-between--and--in-javascript) |
+| 5  | [Explain “this” keyword in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
+| 6  | [What are callback functions in JS?](#2-what-is-the-difference-between--and--in-javascript) |
+| 7  | [What is the event loop in JavaScript runtimes?](#2-what-is-the-difference-between--and--in-javascript) |
+| 8  | [Explain the use of the `map` function in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
+| 9  | [Explain `filter` method in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
+| 10 | [Explain `reduce` method in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
+| 11 | [Write Polyfill for `map`, `filter`, `reduce`](#2-what-is-the-difference-between--and--in-javascript) |
+| 12  | [What is the difference between `map` and `foreach`](#2-what-is-the-difference-between--and--in-javascript) |
+| 13  | [Explain `Map` in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
+| 14  | [Explain `Set` in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
+| 15  | [What's the difference between `Map` and `WeakMap`?](#2-what-is-the-difference-between--and--in-javascript) |
+
 
 
 ### 1. What are the differences between JavaScript variables created using `let`, `var` or `const`?
@@ -36,7 +50,7 @@ In JavaScript, `let`, `var`, and `const` are all keywords used to declare variab
 | Type coercion | Yes | No |
 | Compares value and type | No | Yes |
 
-### What is Event Bubbling or Bubbling in JS ? 
+### 3. What is Event Bubbling or Bubbling in JS ? 
 Event Bubbling is a concept in the DOM (Document Object Model). It happens when an element receives an event, and that event bubbles up (or you can say is transmitted or propagated) to its parent and ancestor elements in the DOM tree until it gets to the root element.
 
 - Event bubbling is essential for event delegation, where a single event handler manages events for multiple child elements, enhancing performance and code simplicity. While convenient, failing to manage event propagation properly can lead to unintended behavior, such as multiple handlers firing for a single event.
@@ -60,7 +74,7 @@ button.addEventListener("click", (event) => {
 });
 ```
 
-### What is Event Delegation in JavaScript ?
+### 4. What is Event Delegation in JavaScript ?
 Event delegation is a event handling pattern in which you handle the events at a higher level in the DOM tree instead of the actual level where the event was received. The event delegation is based on event bubbling concept.
 
 **Advantages -** 
@@ -91,7 +105,7 @@ div.addEventListener("click", (event) => {
 });
 ```
 
-### Explain “this” keyword in JavaScript
+### 5. Explain “this” keyword in JavaScript
 
 There's no simple explanation for this; it is one of the most confusing concepts in JavaScript because it's behavior differs from many other programming languages. The one-liner explanation of the this keyword is that it is a dynamic reference to the context in which a function is executed.
 
@@ -107,7 +121,7 @@ A longer explanation follows is that this follows these rules:
 
 For an in-depth explanation, do check out [Arnav Aggrawal's article on Medium](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3) & [this is JS, Simplified](https://www.youtube.com/watch?v=MgOK_DwJqTM).
 
-### What are callback functions in JS?
+### 6. What are callback functions in JS?
 Callback function is a function which is passed as an argument to another function. Using callback helps you to call a function from another function. 
 ```js
 function log(value) {
@@ -126,7 +140,7 @@ findSum(20, 30, log);
 // window.addEventListener(event, callback function)
 ```
 
-### What is the event loop in JavaScript runtimes?
+### 7. What is the event loop in JavaScript runtimes?
 
 <!-- Update here: /questions/what-is-event-loop-what-is-the-difference-between-call-stack-and-task-queue/en-US.mdx -->
 
@@ -148,7 +162,7 @@ The following are resources explaining the event loop:
 - [In the Loop](https://www.youtube.com/watch?v=cCOL7MC4Pl0) (2018): Jake Archibald previously from the Chrome team provides a visual demonstration of the event loop during JSConf 2018, accounting for different types of tasks.
 - [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (2014): Philip Robert's gave this epic talk at JSConf 2014 and it is one of the most viewed JavaScript videos on YouTube.
 
-### Explain the use of the `map` function in JavaScript.
+### 8. Explain the use of the `map` function in JavaScript.
 - The arr.map method is one of the most useful and often used.
 - It calls the function for each element of the array and returns the array of results.
 ```js
@@ -162,7 +176,7 @@ let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
 alert(lengths); // 5,7,6
 ```
 
-### Explain `filter` method in JavaScript
+### 9. Explain `filter` method in JavaScript
 - The `find` method looks for a single (first) element that makes the function return true.
 - If there may be many, we can use `arr.filter(fn)`.
 - `filter` returns an array of all matching elements
@@ -185,7 +199,7 @@ let someUsers = users.filter(item => item.id < 3);
 
 alert(someUsers.length); // 2
 ```
-### Explain `reduce` method in JavaScript
+### 10. Explain `reduce` method in JavaScript
 - The method `arr.reduce` used to calculate a single value based on the array.
 - The function is applied to all array elements one after another and “carries on” its result to the next call.
 ```js
@@ -211,7 +225,7 @@ alert(result); // 15
 
 For an in-depth explanation do check - [Array methods in JS - javascript.info](https://javascript.info/array-methods)
 
-### Write Polyfill for `map`, `filter`, `reduce`
+### 11. Write Polyfill for `map`, `filter`, `reduce`
 - For detailed explanation for the polyfills of map, filter, reduce do check - [Array Methods Polyfills](https://www.youtube.com/watch?v=dGq0gi0wv64)
 
 ```js
@@ -266,13 +280,13 @@ console.log(sum);
 ```
 
 
-### What is the difference between `map` and `foreach` 
+### 12. What is the difference between `map` and `foreach` 
 - The first difference between `map()` and `forEach()` is the returning value. The `forEach()` method returns `undefined` and `map()` returns a new array with the transformed elements. Even if they do the same job, the returning value remains different.
 - The second difference between these array methods is the fact that `map()` is chainable. This means that you can attach `reduce()`, `sort()`, `filter()` and so on after performing a `map()` method on an array. That's something you can't do with `forEach()` because, as you might guess, it returns `undefined`.
 
 For an in-depth explanation do check - [Main Differences Between forEach and map](https://www.freecodecamp.org/news/4-main-differences-between-foreach-and-map/)
 
-### Explain Map in JavaScript
+### 13. Explain `Map` in JavaScript
     
 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type. Methods and properties are:    
 - [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) – creates the map.
@@ -283,7 +297,7 @@ For an in-depth explanation do check - [Main Differences Between forEach and map
 - [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) – removes everything from the map.
 - [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) – returns the current element count.
 
-### Explain Set in JavaScript    
+### 14. Explain Set in JavaScript    
 A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) is a special type collection – “set of values” (without keys), where each value may occur only once. Its main methods are:    
 - [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) – creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
 - [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) – adds a value, returns the set itself.
@@ -292,7 +306,7 @@ A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 - [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) – removes everything from the set.
 - [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) – is the elements count.
 
-### What's the difference between `Map` and `WeakMap`?
+### 15. What's the difference between `Map` and `WeakMap`?
 | Map | WeakMap | 
 | --- | --- | 
 | A Map is an unordered list of key-value pairs where the key and the value can be of any type like string, boolean, number, etc. | In a Weak Map, every key can only be an object and function. It used to store weak object references. |
@@ -304,7 +318,7 @@ A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 <h1 align="center">React Interview Questions</h1>
 
-### Can you explain the virtual DOM in React?
+### 1. Can you explain the virtual DOM in React?
     
 The virtual DOM is an in-memory representation of the real DOM elements. Instead of interacting directly with the real DOM, which can be slow and costly in terms of performance, React creates a virtual representation of the UI components. This virtual representation is a lightweight JavaScript object that mirrors the structure of the real DOM.
   
@@ -318,7 +332,7 @@ The virtual DOM is an in-memory representation of the real DOM elements. Instead
   
   Read the following article for detailed understanding - [What is the Virtual DOM in React?](https://www.freecodecamp.org/news/what-is-the-virtual-dom-in-react/)
 
-### What is reconciliation in React?
+### 2. What is reconciliation in React?
     
   In React, reconciliation is **the process of updating the user interface (UI) when the state or data of a component changes**. It's a core feature of React that helps ensure fast and efficient updates. 
   
@@ -332,7 +346,7 @@ The virtual DOM is an in-memory representation of the real DOM elements. Instead
   1. Reconciliation minimizes the number of DOM operations, which improves performance
   2. Reconciliation ensures that the UI is consistent with the underlying data, which prevents rendering errors
 
-### What are React fibers, and how do they improve rendering?
+### 3. What are React fibers, and how do they improve rendering?
     
   React Fiber is a core algorithm within React that significantly improves rendering performance by breaking down the rendering process into smaller, manageable chunks, allowing React to pause and resume work as needed, thus maintaining responsiveness even during complex updates and preventing the UI from freezing during heavy computations; essentially enabling "incremental rendering" where updates are spread across multiple frames instead of happening all at once.
   
@@ -352,7 +366,7 @@ The virtual DOM is an in-memory representation of the real DOM elements. Instead
   Overall, React Fiber significantly enhances the performance of React applications by allowing for more granular control over the rendering process, making it especially beneficial for complex UIs with frequent updates and animations.
 
 
-### What is lifting state up in React?
+### 4. What is lifting state up in React?
 
 Lifting state up is an important pattern for React developers because sometimes we have state that's located within a particular component that also needs to be shared with sibling components.
     
@@ -360,7 +374,7 @@ Instead of using an entire state management library like Redux or React Context,
     
 Read the following article for detailed understanding - [What Is "Lifting State Up" in React?](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
 
-### What are Higher Order Components? 
+### 5. What are Higher Order Components? 
     
 HOCs are functions that wrap existing components, providing them with additional props or behaviors. Like a gift wrap, wrapping an existing component and adding additional feature to the gift. 
     
@@ -368,7 +382,7 @@ The main benefit of HOCs is that they enable us to extend the functionality of m
     
 Read the following article for detailed understanding - [Mastering Higher Order Components (HOCs) in React | HackerNoon](https://hackernoon.com/mastering-higher-order-components-hocs-in-react)
 
-### Explain `useState` hook and its purpose
+### 6. Explain `useState` hook and its purpose
 
 The `useState` hook is perhaps the most basic and essential hook in React. It enables you to add state to your functional components, allowing them to keep track of data that changes over time. Let's dive into how `useState` works with a simple example.
 
@@ -390,7 +404,7 @@ const Counter = () => {
 export default Counter;
 ```
 
-### Can you describe the useEffect hook and its purpose?
+### 7. Can you describe the useEffect hook and its purpose?
 
 The `useEffect` hook is used to perform side effects in your functional components, such as fetching data, subscribing to external events, or manually changing the DOM. It combines the functionality of `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` in class components.
 
@@ -453,7 +467,7 @@ const Timer = () => {
 export default Timer;
 ```
 
-### Can you describe the `useContext` hook and its purpose?
+### 8. Can you describe the `useContext` hook and its purpose?
     
 The `useContext` hook is used to consume values from a React context. Context provides a way to pass data through the component tree without having to pass props manually at every level. Let's explore how `useContext` works with a simple example.
 
@@ -511,7 +525,7 @@ const AuthStatus = () => {
 export default AuthStatus;
 ```
 
-### Explain useReducer in React and its usage
+### 9. Explain useReducer in React and its usage
 The `useReducer` hook in React is an alternative to `useState` for managing more complex state logic. It is particularly useful when the state depends on previous states or involves multiple sub-values, enabling better organization and control.
 
 **How `useReducer` Works**
@@ -572,7 +586,7 @@ function App() {
 }
 ```
 
-### How do you update the state of a parent component from a child component?
+### 10. How do you update the state of a parent component from a child component?
     
   To update the state of a parent component from a child component, you can pass a **state-updating function** (defined in the parent) as a **prop** to the child component. The child can then invoke this function to update the parent's state.
     
@@ -628,7 +642,7 @@ export default Child;
   1. **Using Context API**:
   2. **State Management Libraries**
 
-### What is prop drilling and how can you avoid it?
+### 11. What is prop drilling and how can you avoid it?
     
   Prop drilling refers to the process of passing data (props) from a parent component to a deeply nested child component through multiple intermediary components, even if those intermediary components do not directly need the data.
     
@@ -645,11 +659,11 @@ export default Child;
   3. Higher Order components
   4. Custom Hooks
 
-### How to call parent component method from child component in react ?
+### 12. How to call parent component method from child component in react ?
     
 To call a parent component's method from a child component in React, you can pass the parent method as a prop to the child component. This establishes communication between the child and the parent.
 
-### What are React Suspense and React.lazy?
+### 13. What are React Suspense and React.lazy?
     
   React provides **lazy loading** capabilities using `React.lazy()` and `React.Suspense` to improve performance by dynamically loading components only when needed.
   
@@ -730,7 +744,7 @@ To call a parent component's method from a child component in React, you can pas
   - Use `React.lazy()` when you want to split your bundle and **load components only when needed**.
   - Use `React.Suspense` to **handle loading states** for lazy components or asynchronous data fetching in React Server Components.
 
-### Explain lazy loading & create a lazy loaded component in react ?
+### 14. Explain lazy loading & create a lazy loaded component in react ?
 Lazy loading is a design pattern used to improve application performance by deferring the loading of components or resources until they are actually needed. In React, lazy loading is commonly used for components to reduce the initial load time by splitting the code into smaller chunks (code-splitting).
 
 **How It Works**
@@ -795,7 +809,7 @@ export default App;
 Read the following article to understand [Lazy Loading in Routes](https://www.robinwieruch.de/react-router-lazy-loading/)
 
 
-### What's difference between useMemo & useCallback? 
+### 15. What's difference between useMemo & useCallback? 
     
   The main difference between useMemo and useCallback is that **useMemo returns a value, while useCallback returns a function.** Both are React hooks that help optimize performance by avoiding unnecessary re-renders.
   
@@ -808,6 +822,151 @@ Read the following article to understand [Lazy Loading in Routes](https://www.ro
   
   - useMemo is good for optimizing expensive calculations or data transformations.
   - useCallback is good for handling events and other functions that get passed down to child components.
+
+### 16. Explain the difference between controlled and uncontrolled components.
+In React, form inputs can be handled in two ways: **controlled** and **uncontrolled** components. The key difference is **who manages the form state**—React or the DOM.  
+
+**1️⃣ Controlled Components (React Manages State)**
+✅ In **controlled components**, React controls the form element's value via `useState`.  
+✅ The input value is **always updated via state**, and React re-renders when it changes.  
+
+🔹 **Example:** A controlled input field  
+```jsx
+import { useState } from "react";
+
+function ControlledInput() {
+  const [name, setName] = useState("");
+
+  return (
+    <div>
+      <input 
+        type="text" 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+      />
+      <p>Typed: {name}</p>
+    </div>
+  );
+}
+```
+
+**2️⃣ Uncontrolled Components (DOM Manages State)**
+✅ In **uncontrolled components**, the DOM itself keeps track of the input’s value.  
+✅ Instead of using `useState`, we use **`useRef`** to access the input value only when needed.  
+
+🔹 **Example:** An uncontrolled input field  
+```jsx
+import { useRef } from "react";
+
+function UncontrolledInput() {
+  const inputRef = useRef(null);
+
+  const handleSubmit = () => {
+    alert("Entered Name: " + inputRef.current.value);
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+}
+```
+
+**3️⃣ Key Differences:**
+| Feature | Controlled Components | Uncontrolled Components |
+|---------|----------------------|------------------------|
+| **State Management** | Managed by **React state (`useState`)** | Managed by **DOM (`useRef`)** |
+| **Re-renders** | Re-renders on every change | No re-renders on change |
+| **Value Handling** | `value` prop + `onChange` handler | Access value via `useRef` |
+| **Performance** | Can cause more re-renders | More performant (no re-renders) |
+| **Validation** | Easier to validate in real-time | Harder, requires manual handling |
+
+### 17. What is the difference between useEffect, useLayoutEffect, and useInsertionEffect?
+
+React provides three hooks for side effects:  
+1. **`useEffect`** – Runs after the render is committed to the screen.  
+2. **`useLayoutEffect`** – Runs synchronously **before** the browser paints the screen.  
+3. **`useInsertionEffect`** – Runs **before** layout effects and is mainly for injecting styles.  
+
+| Hook | When It Runs | Blocks Rendering? | Use Case |
+|------|-------------|------------------|----------|
+| **`useEffect`** | After render & paint | ❌ No | Fetching data, subscriptions, timers |
+| **`useLayoutEffect`** | After DOM mutation, before paint | ✅ Yes | Measuring DOM, animations, style adjustments |
+| **`useInsertionEffect`** | Before layout effects, before paint | ✅ Yes | Injecting styles (CSS-in-JS) |
+
+### 18. What are React Server Components, and how do they differ from client components?
+
+React Server Components (RSC) are a new type of React component that runs **on the server**, allowing **faster page loads, reduced JavaScript bundle size, and better performance**.  
+
+**1. What Are React Server Components (RSC)?**  
+- They **run on the server** instead of the browser.  
+- They return **serialized UI (HTML/JSON)** instead of JavaScript.  
+- They **don’t include client-side JavaScript**, making them lightweight.  
+- They **fetch data on the server** without exposing API calls to the client.  
+
+**2. What Are Client Components?**  
+- Traditional React components that **run in the browser**.  
+- They **can use state (`useState`) and effects (`useEffect`)**.  
+- They execute on the client, meaning more JavaScript is sent to the browser.  
+
+| Feature            | Server Components (RSC)  | Client Components  |
+|--------------------|------------------------|--------------------|
+| Where They Run    | **Server** (before HTML is sent) | **Browser** (on the client) |
+| JavaScript on Client? | ❌ **No JavaScript sent** | ✅ **JavaScript is sent** |
+| State & Effects   | ❌ **Cannot use state (`useState`) or effects (`useEffect`)** | ✅ **Can use state, hooks, and effects** |
+| Data Fetching     | ✅ **Fetches data directly on the server** | ❌ **Fetches data via API calls** |
+| Performance       | ✅ **Less JavaScript → Faster load times** | ❌ **More JavaScript → Potential performance hit** |
+| Interactivity     | ❌ **Not interactive** | ✅ **Can handle user interactions** |
+
+**✅ Creating a Server Component (Default in Next.js)**
+```tsx
+// Server Component (automatically runs on the server)
+export default async function UserProfile({ userId }) {
+  const user = await fetch(`https://api.example.com/users/${userId}`).then(res => res.json());
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+**✅ Creating a Client Component**
+If you need **state, effects, or interactivity**, add `"use client"` at the top.
+
+```tsx
+"use client";
+
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+| **Use Case**              | **Use Server Component?** | **Use Client Component?** |
+|--------------------------|------------------------|------------------------|
+| Static content (e.g., blog posts, product lists) | ✅ Yes | ❌ No |
+| Data fetching (e.g., fetching from a database) | ✅ Yes | ❌ No |
+| Forms, user input, interactivity (e.g., buttons, modals) | ❌ No | ✅ Yes |
+| Using state (`useState`, `useReducer`) | ❌ No | ✅ Yes |
+| Effects (`useEffect`, event listeners) | ❌ No | ✅ Yes |
+
+
+
+
+
+
    
 
 
