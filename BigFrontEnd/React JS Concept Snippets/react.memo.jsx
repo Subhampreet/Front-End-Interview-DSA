@@ -5,7 +5,7 @@ const Counter = ({ count }) => {
   return <h1>Count : {count}</h1>;
 };
 
-// const MemoizedCounter = React.memo(Counter);
+const MemoizedCounter = React.memo(Counter);
 
 const ReactMemo = () => {
   const [count, setCount] = useState(0);
