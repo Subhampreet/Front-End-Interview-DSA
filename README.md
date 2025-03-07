@@ -9,18 +9,18 @@ This repository contains a few hundred curated JavaScript & React interview ques
 | 1  | [What are the differences between JavaScript variables created using let, var or const?](#1-what-are-the-differences-between-javascript-variables-created-using-let-var-or-const) |
 | 2  | [What is the difference between == and === in JavaScript?](#2-what-is-the-difference-between--and--in-javascript) |
 | 3  | [What is Event Bubbling or Bubbling in JS ? ](#3-what-is-event-bubbling-or-bubbling-in-js-) |
-| 4  | [What is Event Delegation in JavaScript ?](#2-what-is-the-difference-between--and--in-javascript) |
-| 5  | [Explain “this” keyword in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
-| 6  | [What are callback functions in JS?](#2-what-is-the-difference-between--and--in-javascript) |
-| 7  | [What is the event loop in JavaScript runtimes?](#2-what-is-the-difference-between--and--in-javascript) |
-| 8  | [Explain the use of the `map` function in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
-| 9  | [Explain `filter` method in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
-| 10 | [Explain `reduce` method in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
-| 11 | [Write Polyfill for `map`, `filter`, `reduce`](#2-what-is-the-difference-between--and--in-javascript) |
-| 12  | [What is the difference between `map` and `foreach`](#2-what-is-the-difference-between--and--in-javascript) |
-| 13  | [Explain `Map` in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
-| 14  | [Explain `Set` in JavaScript](#2-what-is-the-difference-between--and--in-javascript) |
-| 15  | [What's the difference between `Map` and `WeakMap`?](#2-what-is-the-difference-between--and--in-javascript) |
+| 4  | [What is Event Delegation in JavaScript ?](#4-what-is-event-delegation-in-javascript-) |
+| 5  | [Explain “this” keyword in JavaScript](#5-explain-this-keyword-in-javascript) |
+| 6  | [What are callback functions in JS?](#6-what-are-callback-functions-in-js) |
+| 7  | [What is the event loop in JavaScript runtimes?](#7-what-is-the-event-loop-in-javascript-runtimes) |
+| 8  | [Explain the use of the `map` function in JavaScript](#8-explain-the-use-of-the-map-function-in-javascript) |
+| 9  | [Explain `filter` method in JavaScript](#9-explain-filter-method-in-javascript) |
+| 10 | [Explain `reduce` method in JavaScript](#10-explain-reduce-method-in-javascript) |
+| 11 | [Write Polyfill for `map`, `filter`, `reduce`](#11-write-polyfill-for-map-filter-reduce) |
+| 12  | [What is the difference between `map` and `foreach`](#12-what-is-the-difference-between-map-and-foreach) |
+| 13  | [Explain `Map` in JavaScript](#13-explain-map-in-javascript) |
+| 14  | [Explain `Set` in JavaScript](#14-explain-set-in-javascript) |
+| 15  | [What's the difference between `Map` and `WeakMap`?](#15-whats-the-difference-between-map-and-weakmap) |
 
 
 
