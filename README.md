@@ -21,6 +21,7 @@ This repository contains a few hundred curated JavaScript & React interview ques
 | 13  | [Explain `Map` in JavaScript](#13-explain-map-in-javascript) |
 | 14  | [Explain `Set` in JavaScript](#14-explain-set-in-javascript) |
 | 15  | [What's the difference between `Map` and `WeakMap`?](#15-whats-the-difference-between-map-and-weakmap) |
+| 16  | [What is the difference between a shallow copy and a deep copy?](#16-what-is-the-difference-between-a-shallow-copy-and-a-deep-copy) |
 
 
 
@@ -314,6 +315,19 @@ A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 | Maps will keep everything even if you don’t use them. | WeakMaps holds the reference to the key, not the key itself. |
 | The garbage collector doesn’t remove a key pointer from `Map` and also doesn’t remove the key from memory. | The garbage collector goes ahead and removes the key pointer from `WeakMap` and also removes the key from memory. WeakMap allows the garbage collector to do its task but not the Map. |
 | Maps have some properties : .set, .get, .delete, .size, .has, .forEach, Iterators. | WeakMaps have some properties : .set, .get, .delete, .has. |
+
+### 16. What is the difference between a shallow copy and a deep copy?
+- **Shallow Copy:** Copies only the first-level properties. Nested objects remain
+- **Deep Copy :** Creates an entirely new object, including nested objects.
+
+| **Method** | **Type** | **Best For** | **Drawbacks** |
+|------------|----------|-------------|--------------|
+| **Spread Operator (`...`)** | Shallow | Simple objects | Nested objects are still referenced |
+| **`Object.assign()`** | Shallow | Copying top-level properties | Same as spread operator |
+| **`structuredClone()`** | Deep | Best performance, modern JS | No functions, circular refs |
+| **`JSON.parse(JSON.stringify())`** | Deep | Quick & easy deep copy | Loses functions, `Date`, and `undefined` |
+| **Lodash (`_.cloneDeep()`)** | Deep | Handles all cases | Requires a library |
+
 
 
 <h1 align="center">React Interview Questions</h1>
