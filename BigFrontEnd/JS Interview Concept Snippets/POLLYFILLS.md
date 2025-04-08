@@ -189,3 +189,103 @@ if (!Array.prototype.includes) {
     ```
     
 8. **memoize()**
+     ```jsx
+    function myMemoize(fn, context) {
+      const res = {};
+      return function (...args) {
+        var argsCache = JSON.stringify(args);
+        if (!res[argsCache]) {
+          res[argsCache] = fn.call(context || this, ...args);
+        }
+    
+        return res[argsCache];
+      };
+    }
+    
+    const clumsyProduct = (num1, num2) => {
+      for (let i = 1; i <= 10000; i++) {}
+    
+      return num1 * num2;
+    };
+    
+    const memoizedClumsyProduct = myMemoize(clumsyProduct);
+    
+    console.time("First Call");
+    console.log(memoizedClumsyProduct(9467, 7649));
+    console.timeEnd("First Call");
+    
+    console.time("Second Call");
+    console.log(memoizedClumsyProduct(9467, 7649));
+    console.timeEnd("Second Call");
+    ```
+
+10. **Promise**
+    
+    ```jsx
+    function PromisePolyFill(executor) {
+      let onResolve,
+        onReject,
+        isFulfilled = false,
+        isCalled = false,
+        isRejected = false,
+        value;
+    
+      function resolve(val) {
+        isFulfilled = true;
+        value = val;
+    
+        if (typeof onResolve === "function") {
+          onResolve(val);
+          isCalled = true;
+        }
+      }
+    
+      function reject(val) {
+        isRejected = true;
+        value = val;
+        if (typeof onReject === "function") {
+          onReject(val);
+          isCalled = true;
+        }
+      }
+    
+      this.then = function (callback) {
+        onResolve = callback;
+    
+        if (isFulfilled && !isCalled) {
+          isCalled = true;
+          onResolve(value);
+        }
+    
+        return this;
+      };
+    
+      this.catch = function (callback) {
+        onReject = callback;
+    
+        if (isRejected && !isCalled) {
+          isCalled = true;
+          onReject(value);
+        }
+        return this;
+      };
+    
+      try {
+        executor(resolve, reject);
+      } catch (error) {
+        reject(error);
+      }
+    }
+    
+    const examplePromise = new PromisePolyFill((resolve, reject) => {
+      setTimeout(() => {
+        reject(2);
+      }, 1000);
+    });
+    
+    examplePromise
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.error(err));
+    ```
