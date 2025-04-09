@@ -77,7 +77,7 @@ if (!Array.prototype.includes) {
     console.log(nums.map((num) => num * 3));
     ```
     
-2. **filter()**
+  2. **filter()**
     
     ```jsx
     Array.prototype.myFilter = function (cb) {
@@ -219,7 +219,7 @@ if (!Array.prototype.includes) {
     console.timeEnd("Second Call");
     ```
 
-10. **Promise**
+9. **Promise**
     
     ```jsx
     function PromisePolyFill(executor) {
@@ -288,4 +288,74 @@ if (!Array.prototype.includes) {
         console.log(res);
       })
       .catch((err) => console.error(err));
+    ```
+
+10. **debouncing** 
+    
+    ```jsx
+    const debounce = (fn, time) => {
+      let timeoutId;
+    
+      return function () {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(fn, time);
+      };
+    };
+    
+    const clickBtn = () => {
+      console.log("Hello");
+    };
+    
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", debounce(clickBtn, 1000));
+    ```
+    
+    **Handling Edge Cases** 
+    
+    ```jsx
+    const debounce = (fn, time) => {
+      let timeoutId;
+    
+      return function (...args) {
+        let context = this;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn.call(this, ...args), time);
+      };
+    };
+    
+    const clickBtn = function () {
+      console.log("Hello", this.name);
+    };
+    
+    const James = {
+      name: "James",
+      sayName: debounce(clickBtn, 1000),
+    };
+    
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", () => James.sayName());
+    ```
+11. **throttling** 
+    
+    ```jsx
+    const throttle = (fn, time) => {
+      let isTimerActive = false;
+      return function (...args) {
+        let context = this;
+        if (!isTimerActive) {
+          fn.call(context, ...args);
+          isTimerActive = true;
+          setTimeout(() => {
+            isTimerActive = false;
+          }, time);
+        }
+      };
+    };
+    
+    const clickBtn = function () {
+      console.log("Hello");
+    };
+    
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", throttle(clickBtn, 1000));
     ```
