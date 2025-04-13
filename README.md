@@ -120,7 +120,8 @@ A longer explanation follows is that this follows these rules:
 6. If multiple of the above rules apply, the rule that is higher wins and will set the this value.
 7. If the function is an ES2015 arrow function, it ignores all the rules above and receives the this value of its surrounding scope at the time it is created.
 
-For an in-depth explanation, do check out [Arnav Aggrawal's article on Medium](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3) & [this is JS, Simplified](https://www.youtube.com/watch?v=MgOK_DwJqTM).
+- For an in-depth explanation, do check out [Arnav Aggrawal's article on Medium](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3) & [this is JS, Simplified](https://www.youtube.com/watch?v=MgOK_DwJqTM).
+- [this in JS, simplified] (https://www.youtube.com/watch?v=MgOK_DwJqTM)
 
 ### 6. What are callback functions in JS?
 Callback function is a function which is passed as an argument to another function. Using callback helps you to call a function from another function. 
@@ -328,7 +329,294 @@ A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 | **`JSON.parse(JSON.stringify())`** | Deep | Quick & easy deep copy | Loses functions, `Date`, and `undefined` |
 | **Lodash (`_.cloneDeep()`)** | Deep | Handles all cases | Requires a library |
 
+### 17. What is prototypical inheritance?
+Prototypical inheritance in JavaScript is a way for objects to inherit properties and methods from other objects. Every JavaScript object has a special hidden property called `[[Prototype]]` (commonly accessed via `__proto__` or using `Object.getPrototypeOf()`) that is a reference to another object, which is called the object's "prototype".
 
+When a property is accessed on an object and if the property is not found on that object, the JavaScript engine looks at the object's `__proto__`, and the `__proto__`'s `__proto__` and so on, until it finds the property defined on one of the `__proto__`s or until it reaches the end of the prototype chain.
+
+This behavior simulates classical inheritance, but it is really more of [delegation than inheritance](https://davidwalsh.name/javascript-objects).
+
+Here's an example of prototypal inheritance:
+
+```js
+// Parent object constructor.
+function Animal(name) {
+  this.name = name;
+}
+
+// Add a method to the parent object's prototype.
+Animal.prototype.makeSound = function () {
+  console.log('The ' + this.constructor.name + ' makes a sound.');
+};
+
+// Child object constructor.
+function Dog(name) {
+  Animal.call(this, name); // Call the parent constructor.
+}
+
+// Set the child object's prototype to be the parent's prototype.
+Object.setPrototypeOf(Dog.prototype, Animal.prototype);
+
+// Add a method to the child object's prototype.
+Dog.prototype.bark = function () {
+  console.log('Woof!');
+};
+
+// Create a new instance of Dog.
+const bolt = new Dog('Bolt');
+
+// Call methods on the child object.
+console.log(bolt.name); // "Bolt"
+bolt.makeSound(); // "The Dog makes a sound."
+bolt.bark(); // "Woof!"
+```
+
+Things to note are:
+
+- `.makeSound` is not defined on `Dog`, so the JavaScript engine goes up the prototype chain and finds `.makeSound` on the inherited `Animal`.
+- Using `Object.create()` to build the inheritance chain is no longer recommended. Use `Object.setPrototypeOf()` instead.
+
+### 18. What is a closure in JavaScript, and how/why would you use one?
+In the book ["You Don't Know JS"](https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed/scope-closures) (YDKJS) by Kyle Simpson, a closure is defined as follows:
+
+> Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope
+
+In simple terms, functions have access to variables that were in their scope at the time of their creation. This is what we call the function's lexical scope. A closure is a function that retains access to these variables even after the outer function has finished executing. This is like the function has a memory of its original environment.
+
+```js
+function outerFunction() {
+  const outerVar = 'I am outside of innerFunction';
+
+  function innerFunction() {
+    console.log(outerVar); // `innerFunction` can still access `outerVar`.
+  }
+
+  return innerFunction;
+}
+
+const inner = outerFunction(); // `inner` now holds a reference to `innerFunction`.
+
+inner(); // "I am outside of innerFunction"
+// Even though `outerFunction` has completed execution, `inner` still has access to variables defined inside `outerFunction`.
+```
+
+Key points to remember:
+
+- Closure occurs when an inner function has access to variables in its outer (lexical) scope, even when the outer function has finished executing.
+- Closure allows a function to **remember** the environment in which it was created, even if that environment is no longer present.
+- Closures are used extensively in JavaScript, such as in callbacks, event handlers, and asynchronous functions.
+
+### 19. What's the difference between a JavaScript variable that is: `null`, `undefined` or undeclared?
+
+| Trait | `null` | `undefined` | Undeclared |
+| --- | --- | --- | --- |
+| Meaning | Explicitly set by the developer to indicate that a variable has no value | Variable has been declared but not assigned a value | Variable has not been declared at all |
+| Type | `object` | `undefined` | Throws a `ReferenceError` |
+| Equality Comparison | `null == undefined` is `true` | `undefined == null` is `true` | Throws a `ReferenceError` |
+
+### 20. What is the purpose of the 'bind' method in JavaScript?
+JavaScript bind() method is a powerful tool that allows you to create a new function with a specified this value and optional initial arguments. This method is essential for managing function context and creating partially applied functions in JavaScript.
+
+```jsx
+// Bind Call - fn.bind(context, additional arguments)
+// Bind Example -
+let user = {
+  firstname: "subham",
+};
+
+function print() {
+  console.log(this.firstname);
+}
+
+let myFunc = print.bind(user);
+
+myFunc();
+```
+
+##### Polyfill for Bind method in JS
+
+```jsx
+// Polyfill for Bind  - 
+let user = {
+  firstname: "subham",
+};
+
+function printname(lastname) {
+  console.log(`${this.firstname} - ${lastname}`);
+}
+
+// bind - pollyfill using apply()
+Function.prototype.bindUsingApply = function (ctx, ...args) {
+  let fn = this;
+
+  let allArgs = args;
+
+  return function (...newArgs) {
+    allArgs = [...allArgs, ...newArgs];
+    return fn.apply(ctx, allArgs);
+  };
+};
+
+// bind - polyfill without using apply()
+Function.prototype.bindWithoutUsingApply = function(ctx, ...args){
+  ctx.callableFn = this;
+
+  let allArgs = args;
+
+  return function (...newArgs) {
+    allArgs = [...allArgs, ...newArgs];
+    return ctx.callableFn(allArgs);
+  };
+}
+
+let myName1 = printname.bindUsingApply(user, "123");
+let myName = printname.bindWithoutUsingApply(user, "mohanty");
+
+myName();
+myName1();
+```
+
+- [Polyfills `Bind` with and without `Apply`](https://medium.com/swlh/polyfills-bind-with-and-without-apply-f1e034f21262)
+
+### 21. Describe the differences between 'call' and 'apply' in JavaScript.
+`.call` and `.apply` are both used to invoke functions with a specific `this` context and arguments. The primary difference lies in how they accept arguments:
+
+- `.call(thisArg, arg1, arg2, ...)`: Takes arguments individually.
+- `.apply(thisArg, [argsArray])`: Takes arguments as an array.
+
+Assuming we have a function `add`, the function can be invoked using `.call` and `.apply` in the following manner:
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add.call(null, 1, 2)); // 3
+console.log(add.apply(null, [1, 2])); // 3
+```
+
+### 22. Write Polyfill for `.apply` and `.call`
+```jsx
+let car1 = {
+  color: 'Red',
+  company: 'Ferrari',
+};
+
+let car2 = {
+  color: 'Blue',
+  company: 'BMW',
+};
+
+let car3 = {
+  color: 'White',
+  company: 'Mercedes',
+};
+
+function purchaseCar(currency, price) {
+  console.log(
+    `I have purchased ${this.color} - ${this.company} car for ${currency}${price} `
+  );
+};
+
+// Polyfill for bind()
+Function.prototype.myBind = function (currentContext = {}, ...arg) {
+  if (typeof this !== 'function') {
+    throw new Error(this + "cannot be bound as it's not callable");
+  }
+  currentContext.fn = this;
+  return function () {
+    return currentContext.fn(...arg);
+  };
+};
+
+// polyfill for apply
+Function.prototype.myApply = function (currentContext = {}, arg = []) {
+  if (typeof this !== 'function') {
+    throw new Error(this + "it's not callable");
+  }
+  if (!Array.isArray(arg)) {
+    throw new TypeError('CreateListFromArrayLike called on non-object')
+  }
+  currentContext.fn = this;
+  currentContext.fn(...arg);
+};
+
+// polyfill for call
+Function.prototype.myCall = function (currentContext = {}, ...arg) {
+  if (typeof this !== 'function') {
+    throw new Error(this + "it's not callable");
+  }
+  currentContext.fn = this;
+  currentContext.fn(...arg);
+};
+
+const initPurchaseBmw = purchaseCar.myBind(car1, '₹', '1,00,00,000');
+initPurchaseBmw();
+purchaseCar.myApply(car2, ['₹', '50,00,000']);
+purchaseCar.myCall(car3, '₹', '60,00,000');
+```
+
+### 23. Explain the concept of hoisting in JavaScript
+- **Variable declarations (`var`)**: Declarations are hoisted, but not initializations. The value of the variable is `undefined` if accessed before initialization.
+- **Variable declarations (`let` and `const`)**: Declarations are hoisted, but not initialized. Accessing them results in `ReferenceError` until the actual declaration is encountered.
+- **Function expressions (`var`)**: Declarations are hoisted, but not initializations. The value of the variable is `undefined` if accessed before initialization.
+- **Function declarations (`function`)**: Both declaration and definition are fully hoisted.
+- **Class declarations (`class`)**: Declarations are hoisted, but not initialized. Accessing them results in `ReferenceError` until the actual declaration is encountered.
+- **Import declarations (`import`)**: Declarations are hoisted, and side effects of importing the module are executed before the rest of the code.
+
+The following behavior summarizes the result of accessing the variables before they are declared.
+
+| Declaration                    | Accessing before declaration |
+| ------------------------------ | ---------------------------- |
+| `var foo`                      | `undefined`                  |
+| `let foo`                      | `ReferenceError`             |
+| `const foo`                    | `ReferenceError`             |
+| `class Foo`                    | `ReferenceError`             |
+| `var foo = function() { ... }` | `undefined`                  |
+| `function foo() { ... }`       | Normal                       |
+| `import`                       | Normal                       |
+
+```jsx
+function sayHi() {
+  alert(phrase); // alerts undefined instead of ReferenceError
+
+  var phrase = "Hello";
+}
+
+sayHi();
+
+// The above code gets hoisted and becomes: 
+
+function sayHi() {
+  var phrase; // declaration works at the start...
+
+  alert(phrase); // undefined
+
+  phrase = "Hello"; // ...assignment - when the execution reaches it.
+}
+
+sayHi();
+```
+
+**NOTE:** Declarations made with the `let` and `const` keywords are also subject to hoisting (i.e. they are moved to the top of their *respective scope (global or block))* but are said to be in a ***temporal dead zone (TDZ)*** meaning that any attempt to access them will result in a *reference error*.
+
+### 24. What is the purpose of the 'async' and 'await' keywords in JavaScript?
+    
+  The `async` keyword before a function has two effects:
+  
+  1. Makes it always return a promise.
+  2. Allows `await` to be used in it.
+  
+  The `await` keyword before a promise makes JavaScript wait until that promise settles, and then:
+  
+  1. If it’s an error, an exception is generated — same as if `throw error` were called at that very place.
+  2. Otherwise, it returns the result.
+  
+  Together they provide a great framework to write asynchronous code that is easy to both read and write.
+  
+  With `async/await` we rarely need to write `promise.then/catch`, but we still shouldn’t forget that they are based on promises, because sometimes (e.g. in the outermost scope) we have to use these methods. Also `Promise.all` is nice when we are waiting for many tasks simultaneously.
+    
+- [Async/await JavaScript Info](https://javascript.info/async-await)
 
 <h1 align="center">React Interview Questions</h1>
 
