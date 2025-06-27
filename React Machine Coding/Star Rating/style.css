@@ -1,0 +1,20 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.star-rating {
+  font-size: 24px;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star.hover {
+  color: gold;
+}
+
+.star.active {
+  color: orange;
+}
