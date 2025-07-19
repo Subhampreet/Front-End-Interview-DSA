@@ -1,4 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function () {
 const todoForm = document.querySelector(".todo-form");
 const todoInput = document.querySelector(".todo-input");
 const todoList = document.querySelector(".todo-list");
@@ -55,4 +54,3 @@ function addTodoItem(todoText) {
   todoItem.appendChild(deleteButton);
   todoList.appendChild(todoItem);
 }
-// });
